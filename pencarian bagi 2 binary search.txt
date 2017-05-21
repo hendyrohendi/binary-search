@@ -1,0 +1,148 @@
+Pencarian Bagi Dua (Binary Search)
+
+1. Pengertian Pencarian Bagi Dua (Binary Search)
+Pencarian Bagi Dua (Binary Search) adalah 
+metode dari pencarian yang menggunakan konsep membagi 2 jumlah elemen,
+larik atau array yang telah ditentukan.
+Syarat utama dalam Pencarian Bagi Dua (Binary Search) ialah sekumpulan data atau 
+algoritma yang ingin dicari nanti sudah terurut,
+baik secara menaik atau menurun.
+Proses yang terjadi pada pencarian dengan metode ini adalah sebagai berikut :
+1. Membaca Array data
+2. Apabila Array belum terurut maka array diurutkan terlebih dahulu.
+3. Menentukan data yang akan dicari
+4. Menentukan elemen tengah dari array
+5. Jika nilai elemen tengah sama dengan data yang dicari, maka pencarian berhenti.
+6. Jika elemen tengah tidak sama dengan data yang dicari maka :
+a. Jika nilai elemen tengah > data yang dicari maka pencarian 
+   dilakukan pada setengah array pertama.
+b. Jika nilai elemen tengah lebih kecil dari pada data yang dicari maka
+    pencarian dilakukan pada setengah array berikutnya.
+Pencarian Biner :
+Kelebihannya :
+o Untuk data dalam jumlah besar, waktu searching lebih cepat
+o Beban komputasi lebih kecil
+Kekuranganya :
+o Data harus sudah di-sorting lebih dulu ( dalam keadaan terurut )
+
+
+2. Langkah-langkah dalam Mencari data Menggunakan Konsep Pencarian Bagi Dua (Binary Search)
+Ø Berilah simbol untuk mempermudah dalam memproses data ,
+ seperti sekumpulan data dikodekan menjadi n , larik dikodekan L , 
+dan data yang akan dicari dikodekan menjadi X.
+Ø Sepakati bahwa nilai index awal atau kita kodekan menjadi a=0 dan 
+index akhir atau kita kodekan menjadi b=n-1.
+Ø Tentukan apakah sekumpulan data terurut yang akan dicari bersifat menaik atau menurun
+ dengan cara membandingkan elemen kanan dan kiri
+Ø Jika data elemen paling kiri L[0] > data elemen paling kanan L[n-1],
+ maka data terurut tersebut menurun.
+Ø Jika data elemen paling kiri L[0] < data elemen paling kanan L[n-1], 
+maka data terurut tersebut menaik.
+Ø Selanjutnya kita beri kode untuk index data tengah sebuah array tersebut
+ dengan variabel c , sehingga : C = (a+b)div 2
+Ø Dari rumus diatas,kita langsung mendapatkan data tengah nya.
+Lalu periksa apakah L[c] = X , maka data yang dicari langsung didapat dari rumus C diatas.
+Ø Tetapi jika L[c] < X maka pencarian data dilakukan dari sisi kanan index c atau
+ data tengah dengan menggunakan rumus C tersebut.
+Dan jika L[c] >X maka pencarian data dilakukan dari sisi kiri index c atau 
+data tengah dengan menggunakan rumus C dimana dengan nilai b sama dengan nilai c dan 
+pencarian dilakukan sampai seterusnya hingga ketemu nilai X atau tidak sama sekali.
+(Note : Konsep ini untuk data terurut menaik. Jika data terurut menurun maka hanya mengubah konsep 
+L[c]<X dari sisi kiri dan L[c]>X dari sisi kanan).
+For Example :
+Diberikan sebuah data terurut sebanyak 8 elemen L[8] = {2,3,4,5,6,7,8,9}.
+Tentukanlah nilai X=3 di elemen tersebut ?
+Penyelesaian :
+Tentukan apakah data terurut tersebut menaik atau menurun dengan membaca L[0] dan L[n-1]
+L[0] = 2
+L[7] = 9
+Karena L[0] < L[7] maka data terurut tersebut menaik.
+Misalkan index paling kanan a=0 dan index paling kiri b=7 maka index tengahnya adalah :
+C = (a+b)div 2 = (0+7)div 2 = 3.
+Dari konsep index C didapat elemen tengah adalah 3 dengan L[3] = 5.
+Karena data index tengah lebih besar dari nilai yang akan dicari (L[3] >X )
+ maka pencarian data berikutnya dilakukan pada sisi kiri index C dengan syarat nilai index C sama dengan nilai b,
+ sehingga : B = C = 3 , C = (a+b)div 2 = (0+3)div 2 = 1.
+Elemen tengah menjadi 1 dengan L[1] = 3
+Karena nilai data di elemen tengah sama dengan niali yang dicari atau X maka pencarian berakhir.
+Data X ditemukan di index ke-1.
+
+contoh program binery search
+#include <iostream>
+#include <conio.h>
+#include <iomanip>
+using namespace std;
+int main()
+{
+//Pendeklarassian variabel
+int nilai[20];
+int i,j,n;
+int temp, awal, akhir, tengah, bilangan;
+//Proses penginputan data
+cout<<"Banyak Bilangan: ";
+cin>>n;
+for(i=0;i<n;i++)
+{
+cout<<"Elemen ke-"<<i<<" =";
+cin>>nilai[i];
+}
+cout<<"\n\nElemen sebelum diurut = ";
+for(i=0;i<n;i++)
+{
+cout<<setw(3)<<nilai[i];
+}
+//Proses pengurutan data
+for(i=0;i<n-1;i++)
+{
+for(j=i+1;j<n;j++)
+{
+if(nilai[i]>nilai[j])
+{
+temp = nilai[i];
+nilai[i]=nilai[j];
+nilai[j]=temp;
+}
+}
+}
+cout<<"\nElemen Setelah Di Urut = ";
+for(i=0;i<n;i++)
+{
+cout<<setw(3)<<nilai[i];
+}
+cout<<"\nIndeks Elemen =";
+for(i=0;i<n;i++)
+{
+cout<<setw(3)<<i;
+}
+cout<<"\n\nMasukan data Yang Akan Anda Cari: ";
+cin>>bilangan;
+//Proses pencarian data
+awal = 0;
+akhir =n-1;
+do
+{
+tengah = (akhir+awal)/2;
+if(bilangan < nilai[tengah])
+{
+akhir = tengah -1;
+}
+else
+{
+awal = tengah +1;
+}
+}
+while((akhir>=awal)&&(nilai[tengah] !=bilangan));
+{
+if (nilai[tengah]==bilangan)
+{
+cout<<"\nData "<<bilangan<<" Ada dalam Array";
+cout<<" Pada posisi "<<tengah;
+}
+else
+{
+cout<<"\nData "<<bilangan<<" tidak ada dalam array\n";
+}
+}
+getch();
+return 0;
+}
